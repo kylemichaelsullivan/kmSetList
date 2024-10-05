@@ -11,7 +11,7 @@ import type { Modes } from '@/types';
 type SettingsContextType = {
   mode: Modes;
   handleModeChange: (Mode: Modes) => void;
-  reset: () => void;
+  switchToInitialMode: () => void;
 };
 
 const SettingsContext = createContext<SettingsContextType | undefined>(
@@ -33,14 +33,15 @@ export const SettingsContextProvider = ({
     setMode(mode);
   }
 
-  function reset() {
+  // DEFAULT: "Selecting"
+  function switchToInitialMode() {
     setMode(initialMode);
   }
 
   useEffect(() => {
     const handleKeyUp = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        reset();
+        switchToInitialMode();
       }
     };
 
@@ -56,7 +57,7 @@ export const SettingsContextProvider = ({
       value={{
         mode,
         handleModeChange,
-        reset,
+        switchToInitialMode,
       }}
     >
       {children}
