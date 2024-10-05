@@ -14,7 +14,7 @@ function Song({ song, isFirst, isLast }: SongProps) {
     <div className="Song flex gap-2 w-full group">
       <MoveSong song={song} isFirst={isFirst} isLast={isLast} />
 
-      <div className="song flex-auto border border-current ring-blue-500 rounded-md shadow-lg w-full px-4 py-2 group-hover:ring">
+      <div className="song flex-auto cursor-grab border border-current ring-blue-500 rounded-md shadow-lg w-full px-4 py-2 group-hover:ring">
         {song}
       </div>
 

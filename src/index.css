@@ -9,6 +9,19 @@
     no-repeat center center;
 }
 
+/* should be in Tailwind */
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
+.cursor-no-drop {
+  cursor: no-drop;
+}
+
 .Main {
   min-height: calc(100dvh - 8rem);
 }
