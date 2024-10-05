@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --svg-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M145.6 7.7C141 2.8 134.7 0 128 0s-13 2.8-17.6 7.7l-104 112c-6.5 7-8.2 17.2-4.4 25.9S14.5 160 24 160l56 0 0 192-56 0c-9.5 0-18.2 5.7-22 14.4s-2.1 18.9 4.4 25.9l104 112c4.5 4.9 10.9 7.7 17.6 7.7s13-2.8 17.6-7.7l104-112c6.5-7 8.2-17.2 4.4-25.9s-12.5-14.4-22-14.4l-56 0 0-192 56 0c9.5 0 18.2-5.7 22-14.4s2.1-18.9-4.4-25.9l-104-112z"/></svg>')
+    no-repeat center center;
+}
+
+.after\:up-down::after {
+  position: absolute;
+  content: '';
+  background: black;
+  background-blend-mode: darken;
+  font-size: 3rem;
+  mask: var(--svg-mask);
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* .after\:up-down > button {
+  background: #fff;
+  mix-blend-mode: multiply;
+  transition: background-color 0.3s;
+}
+
+.after\:up-down > button:is(:hover, :focus) {
+  background: #000;
+} */
+
+.after\:up-down > button {
+  background: rgba(255, 255, 255, 0);
+  mix-blend-mode: screen;
+  transition: background-color 0.3s;
+}
+
+.after\:up-down > button:is(:hover, :focus) {
+  background: rgba(0, 0, 0, 0, 0.5);
+}
+
+.Main {
+  min-height: calc(100dvh - 8rem);
+}
+
+.Main:has(> .Performing) {
+  min-height: calc(100dvh - 4rem);
+}
+
+.SliderReset::before {
+  position: absolute;
+  content: 'Slide to Reset';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.SliderReset input {
+  background: #ffffff11;
+}
