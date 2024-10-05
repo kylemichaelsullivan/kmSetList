@@ -12,7 +12,14 @@ function Selecting() {
     <div className="Selecting flex flex-col items-center gap-4 w-full p-4">
       <div className="Songs flex flex-col gap-4 w-full">
         {setlist.length > 0 &&
-          setlist.map((song: string) => <Song song={song} key={song} />)}
+          setlist.map((song: string, index: number) => (
+            <Song
+              song={song}
+              isFirst={index === 0}
+              isLast={index === setlist.length - 1}
+              key={song}
+            />
+          ))}
       </div>
 
       <button

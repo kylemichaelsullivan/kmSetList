@@ -1,25 +1,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleMinus } from '@fortawesome/free-solid-svg-icons';
 
+import MoveSong from './MoveSong';
+
 type SongProps = {
   song: string;
+  isFirst: boolean;
+  isLast: boolean;
 };
 
-function Song({ song }: SongProps) {
+function Song({ song, isFirst, isLast }: SongProps) {
   return (
     <div className="Song flex gap-2 w-full">
-      <div className="relative flex flex-col flex-no-wrap flex-1 min-w-4 after:up-down">
-        <button
-          type="button"
-          className="rounded-t-md flex-1 z-10"
-          title="Move Up"
-        ></button>
-        <button
-          type="button"
-          className="rounded-b-md flex-1 z-10"
-          title="Move Down"
-        ></button>
-      </div>
+      <MoveSong song={song} isFirst={isFirst} isLast={isLast} />
 
       <div className="song flex-auto border border-current rounded-md shadow-lg w-full px-4 py-2">
         {song}
