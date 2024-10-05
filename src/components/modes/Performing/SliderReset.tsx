@@ -1,23 +1,40 @@
-import { useState } from 'react';
+import { type ChangeEvent, type MouseEvent, useState } from 'react';
 
 function SliderReset() {
-  const [rangePosition, setRangePosition] = useState(0);
+  const [rangePositions, setRangePositions] = useState<number[]>([]);
+  const [currentRangePosition, setCurrentRangePosition] = useState(0);
 
-  function reset() {
-    alert('Please define reset()');
+  function resetSlider() {
+    setRangePositions([]);
+    setCurrentRangePosition(0);
   }
 
-  function handleBlur() {
-    console.log(rangePosition);
-    if (rangePosition >= 100) {
-      reset();
-    } else {
-      setRangePosition(0);
+  function reset() {
+    alert('Reset function executed');
+    resetSlider();
+  }
+
+  function handleMouseDown(e: MouseEvent<HTMLInputElement>) {
+    const rangePosition = Number(e.currentTarget.value);
+    if (!isNaN(rangePosition)) {
+      setRangePositions((prev) => [...prev, rangePosition]);
     }
   }
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setRangePosition(Number(event.target.value));
+  function handleMouseUp() {
+    if (currentRangePosition >= 100 && rangePositions[1] < 10) {
+      reset();
+    } else {
+      resetSlider();
+    }
+  }
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    const rangePosition = Number(e.target.value);
+    if (!isNaN(rangePosition)) {
+      setRangePositions((prev) => [...prev, rangePosition]);
+      setCurrentRangePosition(rangePosition);
+    }
   }
 
   return (
@@ -26,9 +43,10 @@ function SliderReset() {
         <input
           type="range"
           className="appearance-none rounded-full cursor-pointer w-full p-2"
-          value={rangePosition}
+          value={currentRangePosition}
+          onMouseDown={handleMouseDown}
           onChange={handleChange}
-          onMouseUp={handleBlur}
+          onMouseUp={handleMouseUp}
         />
       </div>
     </div>
@@ -36,28 +54,3 @@ function SliderReset() {
 }
 
 export default SliderReset;
-
-// import { useState } from 'react';
-
-// function SliderReset() {
-//   const [rangePosition, setRangePosition] = useState<number>(0);
-
-//   function handleBlur(rangePosition: number) {
-//     console.log(rangePosition);
-//   }
-
-//   return (
-//     <div className="SliderReset relative flex w-full">
-//       <div className="flex w-full py-2">
-//         <input
-//           type="range"
-//           className="appearance-none rounded-full cursor-pointer w-full p-2"
-//           defaultValue={0}
-//           onBlur={() => handleBlur(1)}
-//         />
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default SliderReset;
