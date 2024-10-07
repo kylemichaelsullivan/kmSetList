@@ -1,7 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleMinus } from '@fortawesome/free-solid-svg-icons';
-
 import MoveSong from './MoveSong';
+import RemoveSong from './RemoveSong';
 
 type SongProps = {
   song: string;
@@ -11,19 +9,17 @@ type SongProps = {
 
 function Song({ song, isFirst, isLast }: SongProps) {
   return (
-    <div className="Song flex gap-2 w-full group">
+    <div className="Song flex gap-2 items-center w-full group">
       <MoveSong song={song} isFirst={isFirst} isLast={isLast} />
 
-      <div className="song flex-auto cursor-grab border border-current ring-blue-500 rounded-md shadow-lg w-full px-4 py-2 group-hover:ring">
+      <div
+        className="song flex-auto cursor-grab border border-current ring-blue-500 rounded-md shadow-lg w-full px-4 py-2 group-hover:ring"
+        title={`Drag ${song} to Reorder`}
+      >
         {song}
       </div>
 
-      <button
-        type="button"
-        className="flex-1 min-w-4 transition-colors duration-300 hover:text-white"
-      >
-        <FontAwesomeIcon icon={faCircleMinus} />
-      </button>
+      <RemoveSong song={song} />
     </div>
   );
 }

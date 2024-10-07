@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --svg-mask-t: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M145.6 7.7C141 2.8 134.7 0 128 0s-13 2.8-17.6 7.7l-104 112c-6.5 7-8.2 17.2-4.4 25.9S14.5 160 24 160l56 0 0 96 96 0 0-96 56 0c9.5 0 18.2-5.7 22-14.4s2.1-18.9-4.4-25.9l-104-112z"/></svg>')
+  --color-off-black: #ffffff11;
+  --MoveSong-svg-mask-t: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M145.6 7.7C141 2.8 134.7 0 128 0s-13 2.8-17.6 7.7l-104 112c-6.5 7-8.2 17.2-4.4 25.9S14.5 160 24 160l56 0 0 96 96 0 0-96 56 0c9.5 0 18.2-5.7 22-14.4s2.1-18.9-4.4-25.9l-104-112z"/></svg>')
     no-repeat center center;
-  --svg-mask-b: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M110.4 248.3C115 253.2 121.3 256 128 256s13-2.8 17.6-7.7l104-112c6.5-7 8.2-17.2 4.4-25.9S241.5 96 232 96l-56 0 0-96-96 0 0 96-56 0c-9.5 0-18.2 5.7-22 14.4s-2.1 18.9 4.4 25.9l104 112z"/></svg>')
+  --MoveSong-svg-mask-b: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path d="M110.4 248.3C115 253.2 121.3 256 128 256s13-2.8 17.6-7.7l104-112c6.5-7 8.2-17.2 4.4-25.9S241.5 96 232 96l-56 0 0-96-96 0 0 96-56 0c-9.5 0-18.2 5.7-22 14.4s-2.1 18.9 4.4 25.9l104 112z"/></svg>')
     no-repeat center center;
 }
 
@@ -40,7 +41,11 @@
 }
 
 .Performing .SliderReset input {
-  background-color: #ffffff11;
+  background-color: var(--color-off-black);
+}
+
+.Performing .Song.played {
+  color: var(--color-off-black);
 }
 
 /* Selecting */
@@ -49,12 +54,12 @@
 }
 
 .Selecting .MoveSong .btn-up {
-  mask: var(--svg-mask-t);
+  mask: var(--MoveSong-svg-mask-t);
   mask-position: bottom;
 }
 
 .Selecting .MoveSong .btn-down {
-  mask: var(--svg-mask-b);
+  mask: var(--MoveSong-svg-mask-b);
   mask-position: top;
 }
 
@@ -62,5 +67,52 @@
 .Selecting .Song:last-of-type .MoveSong > button:last-of-type {
   background-color: transparent;
 }
+
+.Selecting .SliderReset .slider {
+  position: relative;
+  width: 100%;
+}
+
+.Selecting .SliderReset {
+  --SliderReset-track-background: var(--color-off-black);
+  --SliderReset-position: 0%;
+}
+
+.Selecting .SliderReset .slider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: var(--SliderReset-position);
+  z-index: -1;
+}
+
+.Selecting .SliderReset .slider {
+  cursor: pointer;
+  appearance: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+}
+
+/*
+.Selecting .SliderReset .slider::-webkit-slider-thumb {
+  appearance: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.Selecting .SliderReset .slider::-moz-range-thumb {
+  width: 16px; /* Adjust the width as needed * /
+  height: 16px; /* Adjust the height as needed * /
+  background: #4caf50; /* Color for the thumb * /
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+} */
 
 /* Editing */

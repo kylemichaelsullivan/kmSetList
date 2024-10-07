@@ -3,6 +3,8 @@ import { useState, createContext, useContext, type ReactNode } from 'react';
 type SetlistContextType = {
   setlist: string[];
   handleSetlistChange: () => void;
+  addSongToSetlist: () => void;
+  resetSetlist: () => void;
 };
 
 const SetlistContext = createContext<SetlistContextType | undefined>(undefined);
@@ -21,6 +23,7 @@ const initialSetlist: string[] = [
   'Psychobilly Rocketship',
   'Hate It Here',
   'Hope',
+  "The World's Not as Tragic",
 ];
 
 export const SetlistContextProvider = ({
@@ -32,11 +35,21 @@ export const SetlistContextProvider = ({
     setSetlist(setlist);
   }
 
+  function addSongToSetlist() {
+    setSetlist([...setlist, 'New Song']);
+  }
+
+  function resetSetlist() {
+    setSetlist([]);
+  }
+
   return (
     <SetlistContext.Provider
       value={{
         setlist,
         handleSetlistChange,
+        addSongToSetlist,
+        resetSetlist,
       }}
     >
       {children}

@@ -12,6 +12,7 @@ type SettingsContextType = {
   mode: Modes;
   handleModeChange: (Mode: Modes) => void;
   switchToInitialMode: () => void;
+  switchToSelectingMode: () => void;
 };
 
 const SettingsContext = createContext<SettingsContextType | undefined>(
@@ -38,6 +39,10 @@ export const SettingsContextProvider = ({
     setMode(initialMode);
   }
 
+  function switchToSelectingMode() {
+    setMode('Selecting');
+  }
+
   useEffect(() => {
     const handleKeyUp = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -58,6 +63,7 @@ export const SettingsContextProvider = ({
         mode,
         handleModeChange,
         switchToInitialMode,
+        switchToSelectingMode,
       }}
     >
       {children}
