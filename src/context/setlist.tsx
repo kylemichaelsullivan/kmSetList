@@ -23,7 +23,7 @@ const initialSetlist: string[] = [
   'Psychobilly Rocketship',
   'Hate It Here',
   'Hope',
-  "The World's Not as Tragic",
+  'The World’s Not as Tragic',
 ];
 
 export const SetlistContextProvider = ({

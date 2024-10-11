@@ -1,4 +1,4 @@
-import { type ChangeEvent, type MouseEvent, useRef, useState } from 'react';
+import { useState, useRef, type ChangeEvent, type MouseEvent } from 'react';
 
 import { useSetlist } from '@/context/setlist';
 
