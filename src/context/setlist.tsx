@@ -6,6 +6,7 @@ type SetlistContextType = {
   handleSetlistChange: () => void;
   toggleHasPlayed: (song: string) => void;
   addSongToSetlist: () => void;
+  restoreSetlist: () => void;
   resetSetlist: () => void;
 };
 
@@ -49,13 +50,17 @@ export const SetlistContextProvider = ({
     setHasPlayed({ ...hasPlayed, [newSong]: false });
   }
 
-  function resetSetlist() {
+  function restoreSetlist() {
     setHasPlayed(
       Object.keys(hasPlayed).reduce(
         (acc, song) => ({ ...acc, [song]: false }),
         {},
       ),
     );
+  }
+
+  function resetSetlist() {
+    setSetlist([]);
   }
 
   function toggleHasPlayed(song: string) {
@@ -69,6 +74,7 @@ export const SetlistContextProvider = ({
         hasPlayed,
         handleSetlistChange,
         addSongToSetlist,
+        restoreSetlist,
         resetSetlist,
         toggleHasPlayed,
       }}

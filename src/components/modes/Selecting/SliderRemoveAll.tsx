@@ -30,8 +30,6 @@ function SliderRemoveAll() {
   }
 
   function handleMouseUp() {
-    console.log(currentRangePosition);
-    console.log(rangePositions);
     if (currentRangePosition >= 100 && rangePositions[1] < 10) {
       reset();
     } else {
