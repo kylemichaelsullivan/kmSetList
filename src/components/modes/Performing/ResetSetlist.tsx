@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRotate } from '@fortawesome/free-solid-svg-icons';
 
+import { useSetlist } from '@/context/setlist';
+
 function ResetSetlist() {
-  function resetSetlist() {
-    alert('resetSetlist()');
-  }
+  const { resetSetlist } = useSetlist();
 
   return (
     <button
