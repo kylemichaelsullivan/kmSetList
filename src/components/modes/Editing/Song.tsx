@@ -1,5 +1,5 @@
 import ToggleSong from '@/components/modes/Editing/ToggleSong';
-import DeleteSong from '@/components/modes/Editing/DeleteSong';
+import RemoveSong from '@/components/modes/Editing/RemoveSong';
 
 type SongProps = {
   song: string;
@@ -17,7 +17,7 @@ function Song({ song }: SongProps) {
         defaultValue={song}
       />
 
-      <DeleteSong song={song} />
+      <RemoveSong song={song} />
     </div>
   );
 }

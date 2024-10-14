@@ -1,18 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-type DeleteSongProps = {
+type RemoveSongProps = {
   song: string;
 };
 
-function DeleteSong({ song }: DeleteSongProps) {
+function RemoveSong({ song }: RemoveSongProps) {
   function confirmDelete() {
     if (
       confirm(
         `Are you sure you want to DELETE ${song}?\nThis action cannot be undone.`,
       )
     ) {
-      // User clicked "OK"
       alert(`${song} has been deleted.`);
     }
   }
@@ -20,7 +19,7 @@ function DeleteSong({ song }: DeleteSongProps) {
   return (
     <button
       type="button"
-      className="DeleteSong flex-1 text-gray-500 min-w-4 transition-colors duration-300 hover:text-gray-900"
+      className="RemoveSong flex-1 text-gray-500 min-w-4 transition-colors duration-300 hover:text-gray-900"
       title={`Delete ${song} from Catalog`}
       onClick={confirmDelete}
     >
@@ -29,4 +28,4 @@ function DeleteSong({ song }: DeleteSongProps) {
   );
 }
 
-export default DeleteSong;
+export default RemoveSong;
