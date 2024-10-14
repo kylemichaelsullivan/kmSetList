@@ -51,20 +51,6 @@ function SliderRemoveAll() {
     }
   }
 
-  // function handleChange(e: ChangeEvent<HTMLInputElement>) {
-  //   const rangePosition = Number(e.target.value);
-  //   if (!isNaN(rangePosition)) {
-  //     if (sliderRef.current) {
-  //       sliderRef.current.style.setProperty(
-  //         '--SliderRemoveAll-position',
-  //         `${rangePosition}%`,
-  //       );
-  //     }
-  //     setRangePositions((prev) => [...prev, rangePosition]);
-  //     setCurrentRangePosition(rangePosition);
-  //   }
-  // }
-
   return (
     <div className="SliderRemoveAll relative flex w-full" ref={sliderRef}>
       <div className="flex w-full py-2">
