@@ -11,7 +11,6 @@ function ToggleSong({ song }: ToggleSongPtops) {
   const [isActive, setIsActive] = useState();
 
   // I'm leaning hard on conventions to convey meaning here
-
   function toggleSong() {
     alert(`${song} toggled.`);
   }

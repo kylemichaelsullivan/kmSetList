@@ -1,20 +1,55 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
 
+import { useCatalog } from '@/context/catalog';
 import { useSetlist } from '@/context/setlist';
 
+import AddSongButton from './AddSongButton';
+import NoSongs from '@/components/NoSongs';
+
 function AddSong() {
-  const { addSongToSetlist } = useSetlist();
+  const { catalog } = useCatalog();
+  const { setlist, selectSong, handleSelectSong } = useSetlist();
+
+  // keyWord: type so it's only songs
+  const [unselectedSongs, setUnselectedSongs] = useState<string[]>([]);
+
+  function getUnselectedSongs() {
+    return catalog.filter((song) => !setlist.includes(song));
+  }
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    handleSelectSong(e.target.value);
+  };
+
+  useEffect(() => {
+    if (catalog && setlist) {
+      setUnselectedSongs(getUnselectedSongs());
+    }
+  }, [catalog, setlist]);
 
   return (
-    <button
-      type="button"
-      className="AddSong flex justify-center items-center border border-current ring-blue-500 rounded-full font-bold text-xxxl w-8 h-8 transition-colors duration-300 hover:bg-black hover:text-white hover:ring"
-      title="Add Song to Setlist"
-      onClick={addSongToSetlist}
-    >
-      <FontAwesomeIcon icon={faPlus} />
-    </button>
+    <div className="AddSong flex gap-2 items-center w-full group">
+      <div className="song flex-auto cursor-grab bg-white border border-current ring-blue-500 rounded-md shadow-lg w-full p-2 group-hover:ring">
+        {unselectedSongs ? (
+          <select
+            className="bg-transparent w-full"
+            value={selectSong}
+            onChange={handleSelectChange}
+          >
+            <option value=""></option>
+            {unselectedSongs.map((song) => (
+              <option value={song} key={song}>
+                {song}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <NoSongs />
+        )}
+      </div>
+
+      <AddSongButton />
+    </div>
   );
 }
 

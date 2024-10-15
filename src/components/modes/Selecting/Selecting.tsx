@@ -28,7 +28,10 @@ function Selecting() {
           <SliderRemoveAll />
         </>
       ) : (
-        <NoSongs />
+        <>
+          <NoSongs />
+          <AddSong />
+        </>
       )}
     </div>
   );
