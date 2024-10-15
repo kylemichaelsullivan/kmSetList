@@ -74,7 +74,7 @@
   --slider-thumb-color: var(--red-600);
   --slider-thumb-height: 0.375rem;
   --slider-thumb-size: 1.25rem;
-  --slider-track-color: #ffffff;
+  --slider-track-color: transparent;
   --slider-track-height: 0.5rem;
 }
 
@@ -96,6 +96,7 @@
 .Selecting .SliderRemoveAll .slider::-webkit-slider-runnable-track {
   background: linear-gradient(
     to right,
+    transparent,
     var(--slider-thumb-color) var(--SliderRemoveAll-position),
     var(--slider-track-color) var(--SliderRemoveAll-position),
     transparent
@@ -108,7 +109,8 @@
     to right,
     transparent,
     var(--slider-thumb-color) var(--SliderRemoveAll-position),
-    var(--slider-track-color) var(--SliderRemoveAll-position)
+    var(--slider-track-color) var(--SliderRemoveAll-position),
+    transparent
   );
   height: var(--slider-track-height);
 }
