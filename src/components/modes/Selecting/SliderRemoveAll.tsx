@@ -56,7 +56,7 @@ function SliderRemoveAll() {
       <div className="flex w-full py-2">
         <input
           type="range"
-          className="slider appearance-none border border-black rounded-full ring-blue-500 cursor-pointer w-full p-2 hover:ring"
+          className="slider appearance-none bg-transparent border border-black rounded-full ring-blue-500 cursor-pointer w-full p-2 hover:ring"
           value={currentRangePosition}
           title="Slide from Left to Right to Reset"
           onMouseDown={handleMouseDown}
