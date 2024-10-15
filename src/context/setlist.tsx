@@ -9,6 +9,8 @@ type SetlistContextType = {
   handleSetlistChange: () => void;
   toggleHasPlayed: (song: string) => void;
   addSongToSetlist: () => void;
+  moveUpSongInSetlist: (song: string) => void;
+  moveDownSongInSetlist: (song: string) => void;
   removeSongFromSetlist: (song: string) => void;
   restoreSetlist: () => void;
   resetSetlist: () => void;
@@ -64,6 +66,30 @@ export const SetlistContextProvider = ({
     }
   }
 
+  function moveUpSongInSetlist(song: string) {
+    const index = setlist.indexOf(song);
+    if (index > 0) {
+      const newSetlist = [...setlist];
+      [newSetlist[index - 1], newSetlist[index]] = [
+        newSetlist[index],
+        newSetlist[index - 1],
+      ];
+      setSetlist(newSetlist);
+    }
+  }
+
+  function moveDownSongInSetlist(song: string) {
+    const index = setlist.indexOf(song);
+    if (index < setlist.length - 1) {
+      const newSetlist = [...setlist];
+      [newSetlist[index], newSetlist[index + 1]] = [
+        newSetlist[index + 1],
+        newSetlist[index],
+      ];
+      setSetlist(newSetlist);
+    }
+  }
+
   // keyWord: type to only be song
   function removeSongFromSetlist(song: string) {
     if (song) {
@@ -100,6 +126,8 @@ export const SetlistContextProvider = ({
         handleSelectSong,
         handleSetlistChange,
         addSongToSetlist,
+        moveUpSongInSetlist,
+        moveDownSongInSetlist,
         removeSongFromSetlist,
         restoreSetlist,
         resetSetlist,
