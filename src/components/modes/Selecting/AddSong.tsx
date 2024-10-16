@@ -36,7 +36,7 @@ function AddSong() {
             value={selectSong}
             onChange={handleSelectChange}
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               [select a song]
             </option>
             {unselectedSongs.map((song) => (
