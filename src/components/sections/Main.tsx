@@ -8,25 +8,25 @@ import { SetlistContextProvider } from '@/context/setlist';
 import { _Modes } from '@/lookups';
 
 function Main() {
-  const { mode } = useSettings();
+	const { mode } = useSettings();
 
-  const modeComponents: any = {
-    Performing: Performing,
-    Selecting: Selecting,
-    Editing: Editing,
-  };
+	const modeComponents: any = {
+		Performing: Performing,
+		Selecting: Selecting,
+		Editing: Editing,
+	};
 
-  const ModeComponent = modeComponents[mode] || null;
+	const ModeComponent = modeComponents[mode] || null;
 
-  return (
-    <SetlistContextProvider>
-      <main
-        className={`Main border-b border-black p-4 bg-${_Modes[mode][0]} text-${_Modes[mode][1]}`}
-      >
-        {ModeComponent && <ModeComponent />}
-      </main>
-    </SetlistContextProvider>
-  );
+	return (
+		<SetlistContextProvider>
+			<main
+				className={`Main border-b border-black p-4 bg-${_Modes[mode][0]} text-${_Modes[mode][1]}`}
+			>
+				{ModeComponent && <ModeComponent />}
+			</main>
+		</SetlistContextProvider>
+	);
 }
 
 export default Main;

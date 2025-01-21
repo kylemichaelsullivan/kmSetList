@@ -5,24 +5,24 @@ import AddSong from './AddSong';
 import { useCatalog } from '@/context/catalog';
 
 function Editing() {
-  const { catalog } = useCatalog();
-  const alphabeticalCatalog = [...catalog].sort();
+	const { catalog } = useCatalog();
+	const alphabeticalCatalog = [...catalog].sort();
 
-  return (
-    <div className="Editing flex flex-col items-center gap-4 w-full p-4">
-      {catalog.length > 0 ? (
-        <div className="Songs flex flex-col gap-4 w-full">
-          {alphabeticalCatalog.map((song: string) => (
-            <Song song={song} key={song} />
-          ))}
-        </div>
-      ) : (
-        <NoSongs />
-      )}
+	return (
+		<div className='Editing flex w-full flex-col items-center gap-4 p-4'>
+			{catalog.length > 0 ? (
+				<div className='Songs flex w-full flex-col gap-4'>
+					{alphabeticalCatalog.map((song: string) => (
+						<Song song={song} key={song} />
+					))}
+				</div>
+			) : (
+				<NoSongs />
+			)}
 
-      <AddSong />
-    </div>
-  );
+			<AddSong />
+		</div>
+	);
 }
 
 export default Editing;

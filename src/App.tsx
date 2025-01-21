@@ -5,15 +5,15 @@ import Footer from '@/components/sections/Footer';
 import { CatalogContextProvider } from '@/context/catalog';
 
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <CatalogContextProvider>
-        <Main />
-      </CatalogContextProvider>
-      <Footer />
-    </div>
-  );
+	return (
+		<div className='App'>
+			<Header />
+			<CatalogContextProvider>
+				<Main />
+			</CatalogContextProvider>
+			<Footer />
+		</div>
+	);
 }
 
 export default App;

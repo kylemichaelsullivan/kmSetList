@@ -6,35 +6,35 @@ import SliderRemoveAll from './SliderRemoveAll';
 import { useSetlist } from '@/context/setlist';
 
 function Selecting() {
-  const { setlist } = useSetlist();
+	const { setlist } = useSetlist();
 
-  return (
-    <div className="Selecting flex flex-col items-center gap-4 w-full p-4">
-      {setlist.length > 0 ? (
-        <>
-          <div className="Songs flex flex-col gap-4 w-full">
-            {setlist.map((song: string, index: number) => (
-              <Song
-                song={song}
-                isFirst={index === 0}
-                isLast={index === setlist.length - 1}
-                key={song}
-              />
-            ))}
-          </div>
+	return (
+		<div className='Selecting flex w-full flex-col items-center gap-4 p-4'>
+			{setlist.length > 0 ? (
+				<>
+					<div className='Songs flex w-full flex-col gap-4'>
+						{setlist.map((song: string, index: number) => (
+							<Song
+								song={song}
+								isFirst={index === 0}
+								isLast={index === setlist.length - 1}
+								key={song}
+							/>
+						))}
+					</div>
 
-          <AddSong />
+					<AddSong />
 
-          <SliderRemoveAll />
-        </>
-      ) : (
-        <>
-          <NoSongs />
-          <AddSong />
-        </>
-      )}
-    </div>
-  );
+					<SliderRemoveAll />
+				</>
+			) : (
+				<>
+					<NoSongs />
+					<AddSong />
+				</>
+			)}
+		</div>
+	);
 }
 
 export default Selecting;
