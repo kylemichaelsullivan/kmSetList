@@ -3,15 +3,18 @@ import Main from '@/components/sections/Main';
 import Footer from '@/components/sections/Footer';
 
 import { CatalogContextProvider } from '@/context/catalog';
+import { SetlistContextProvider } from '@/context/setlist';
 
 function App() {
 	return (
 		<div className='App'>
-			<Header />
 			<CatalogContextProvider>
-				<Main />
+				<Header />
+				<SetlistContextProvider>
+					<Main />
+				</SetlistContextProvider>
+				<Footer />
 			</CatalogContextProvider>
-			<Footer />
 		</div>
 	);
 }
