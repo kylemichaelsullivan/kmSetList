@@ -1,22 +1,28 @@
-import ToggleSong from '@/components/modes/Editing/ToggleSong';
-import RemoveSong from '@/components/modes/Editing/RemoveSong';
+import { useCatalog } from '@/context/catalog';
+
+import ToggleSong from './ToggleSong';
+import SongDetails from './SongDetails';
+import RemoveSong from './RemoveSong';
+
+import type { TSong } from '@/types';
 
 type SongProps = {
-	song: string;
+	song: TSong;
 };
 
 function Song({ song }: SongProps) {
+	const { toggleSongInCatalog } = useCatalog();
+	const songName = song[0];
+	const isActive = song[3];
+
 	return (
-		<div className='Song group flex w-full items-center gap-2'>
-			<ToggleSong song={song} />
-
-			<input
-				type='text'
-				className='song w-full rounded-md border border-current px-4 py-2 shadow-lg ring-blue-500 group-hover:ring'
-				name={song}
-				defaultValue={song}
+		<div className='Song group flex w-full gap-4'>
+			<ToggleSong
+				songName={songName}
+				isActive={isActive}
+				toggleSong={() => toggleSongInCatalog(songName)}
 			/>
-
+			<SongDetails song={song} isActive={isActive} />
 			<RemoveSong song={song} />
 		</div>
 	);

@@ -1,4 +1,4 @@
-import Song from './Song';
+import Songs from './Songs';
 import NoSongs from '@/components/NoSongs';
 import AddSong from './AddSong';
 
@@ -9,16 +9,8 @@ function Editing() {
 	const alphabeticalCatalog = [...catalog].sort();
 
 	return (
-		<div className='Editing flex w-full flex-col items-center gap-4 p-4'>
-			{catalog.length > 0 ? (
-				<div className='Songs flex w-full flex-col gap-4'>
-					{alphabeticalCatalog.map((song: string) => (
-						<Song song={song} key={song} />
-					))}
-				</div>
-			) : (
-				<NoSongs />
-			)}
+		<div className='Editing flex gap-4 w-full flex-col items-center p-4'>
+			{catalog.length > 0 ? <Songs songs={alphabeticalCatalog} /> : <NoSongs />}
 
 			<AddSong />
 		</div>

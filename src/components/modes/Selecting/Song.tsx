@@ -2,24 +2,24 @@ import MoveSong from './MoveSong';
 import RemoveSong from './RemoveSong';
 
 type SongProps = {
-	song: string;
+	songName: string;
 	isFirst: boolean;
 	isLast: boolean;
 };
 
-function Song({ song, isFirst, isLast }: SongProps) {
+function Song({ songName, isFirst, isLast }: SongProps) {
 	return (
-		<div className='Song group flex w-full items-center gap-2'>
-			<MoveSong song={song} isFirst={isFirst} isLast={isLast} />
+		<div className='Song group flex w-full items-center gap-4'>
+			<MoveSong songName={songName} isFirst={isFirst} isLast={isLast} />
 
 			<div
 				className='song w-full flex-auto cursor-grab rounded-md border border-current px-4 py-2 shadow-lg ring-blue-500 group-hover:ring'
-				title={`Drag ${song} to Reorder`}
+				title={`Drag ${songName} to Reorder`}
 			>
-				{song}
+				{songName}
 			</div>
 
-			<RemoveSong song={song} />
+			<RemoveSong songName={songName} />
 		</div>
 	);
 }
