@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { Modes } from '@/types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,9 +8,7 @@ import {
 	faPen,
 } from '@fortawesome/free-solid-svg-icons';
 
-type ModeColors = {
-	[key in Modes]: [string, string, any];
-};
+type ModeColors = Record<Modes, [string, string, ReactNode]>;
 
 export const _Modes: ModeColors = {
 	Performing: ['gray-900', 'white', <FontAwesomeIcon icon={faPlay} />],

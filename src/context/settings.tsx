@@ -23,7 +23,7 @@ type SettingsContextProviderProps = {
 	children: ReactNode;
 };
 
-const initialMode: Modes = 'Selecting';
+const initialMode: Modes = 'Performing';
 
 export const SettingsContextProvider = ({
 	children,

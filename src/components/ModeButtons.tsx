@@ -7,7 +7,12 @@ function ModeButtons() {
 	return (
 		<>
 			{Object.entries(_Modes).map(([k, v]) => (
-				<ModeButton label={k as Modes} colors={v} key={k} />
+				<ModeButton
+					label={k as Modes}
+					colors={v as string[]}
+					icon={v[2]}
+					key={k}
+				/>
 			))}
 		</>
 	);
