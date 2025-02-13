@@ -1,11 +1,11 @@
-import { useState, createContext, useContext, type ReactNode } from 'react';
+import { type ReactNode, useState, createContext, useContext } from 'react';
 
 import type { TSongs } from '@/types';
 
 type CatalogContextType = {
 	catalog: TSongs;
 	handleCatalogChange: () => void;
-	addSongToCatalog: (newSong: string[]) => void;
+	addSongToCatalog: () => void;
 	toggleSongInCatalog: (songName: string) => void;
 	removeSongFromCatalog: (songName: string) => void;
 	resetCatalog: () => void;
@@ -47,7 +47,6 @@ export const CatalogContextProvider = ({
 	}
 
 	function addSongToCatalog() {
-		alert('addSongToCatalog()');
 		setCatalog([...catalog, ['', '', 120, true, Date.now()]]);
 	}
 

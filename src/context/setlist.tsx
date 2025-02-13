@@ -1,8 +1,18 @@
-import { useState, createContext, useContext, type ReactNode } from 'react';
+import {
+	type ReactNode,
+	useState,
+	createContext,
+	useContext,
+	useEffect,
+} from 'react';
+
+import { useCatalog } from '@/context/catalog';
+
+import type { TSong, TSongs } from '@/types';
 
 // keyWord: type to only be song
 type SetlistContextType = {
-	setlist: string[];
+	setlist: TSongs;
 	hasPlayed: { [key: string]: boolean };
 	selectSong: string;
 	handleSelectSong: (song: string) => void;
@@ -22,32 +32,45 @@ type SetlistContextProviderProps = {
 	children: ReactNode;
 };
 
-const initialSetlist: string[] = [];
-// const initialSetlist: string[] = [
-//   'To Be Continued…',
-//   'Best Cult in Michigan',
-//   'Anything At All',
-//   'Black Hole',
-//   'Hail to the Old Mountain',
-//   'Psychobilly Rocketship',
-//   'Hate It Here',
-//   'Hope',
-//   'The World’s Not as Tragic',
-// ];
-
-const initialHasPlayed: { [key: string]: boolean } = initialSetlist.reduce(
-	(acc, song) => ({ ...acc, [song]: false }),
-	{},
-);
-
-const initialSelectSong = '';
+const initialSetlistSongs: string[] = [
+	'Choke',
+	'Break Me',
+	'All of You',
+	'Scared',
+	'Bed',
+	'Get Straight',
+	'Dallas',
+	'Firework',
+	'Glass',
+	'Chances',
+	'Jimmy',
+];
 
 export const SetlistContextProvider = ({
 	children,
 }: SetlistContextProviderProps) => {
-	const [setlist, setSetlist] = useState(initialSetlist);
-	const [hasPlayed, setHasPlayed] = useState(initialHasPlayed);
-	const [selectSong, setSelectSong] = useState(initialSelectSong);
+	const { catalog } = useCatalog();
+
+	const [setlist, setSetlist] = useState<TSongs>([]);
+	const [hasPlayed, setHasPlayed] = useState<{ [key: string]: boolean }>({});
+	const [selectSong, setSelectSong] = useState<string>('');
+
+	useEffect(() => {
+		const initialSetlist: TSongs = initialSetlistSongs
+			.map((songName) => {
+				const song = catalog.find((song: TSong) => song[0] === songName);
+				if (!song) return null;
+				return song;
+			})
+			.filter(Boolean) as TSongs;
+
+		setSetlist(initialSetlist);
+		const initialHasPlayed = initialSetlist.reduce(
+			(acc, song) => ({ ...acc, [song[0]]: false }),
+			{},
+		);
+		setHasPlayed(initialHasPlayed);
+	}, [catalog]);
 
 	function handleSetlistChange() {
 		setSetlist(setlist);
@@ -60,14 +83,18 @@ export const SetlistContextProvider = ({
 	// keyWord: type to only be song
 	function addSongToSetlist() {
 		if (selectSong) {
-			setSetlist([...setlist, selectSong]);
-			setHasPlayed({ ...hasPlayed, [selectSong]: false });
-			setSelectSong('');
+			const songToAdd = catalog.find((song) => song[0] === selectSong);
+			if (songToAdd) {
+				setSetlist([...setlist, songToAdd]);
+				setHasPlayed({ ...hasPlayed, [selectSong]: false });
+				setSelectSong('');
+			}
 		}
 	}
 
-	function moveUpSongInSetlist(song: string) {
-		const index = setlist.indexOf(song);
+	function moveUpSongInSetlist(songName: string) {
+		const index = setlist.findIndex((song) => song[0] === songName);
+
 		if (index > 0) {
 			const newSetlist = [...setlist];
 			[newSetlist[index - 1], newSetlist[index]] = [
@@ -78,8 +105,9 @@ export const SetlistContextProvider = ({
 		}
 	}
 
-	function moveDownSongInSetlist(song: string) {
-		const index = setlist.indexOf(song);
+	function moveDownSongInSetlist(songName: string) {
+		const index = setlist.findIndex((song) => song[0] === songName);
+
 		if (index < setlist.length - 1) {
 			const newSetlist = [...setlist];
 			[newSetlist[index], newSetlist[index + 1]] = [
@@ -90,12 +118,17 @@ export const SetlistContextProvider = ({
 		}
 	}
 
+	function toggleHasPlayed(song: string) {
+		const updatedHasPlayed = { ...hasPlayed, [song]: !hasPlayed[song] };
+		setHasPlayed(updatedHasPlayed);
+	}
+
 	// keyWord: type to only be song
-	function removeSongFromSetlist(song: string) {
-		if (song) {
-			setSetlist(setlist.filter((s) => s !== song));
+	function removeSongFromSetlist(songName: string) {
+		if (songName) {
+			setSetlist(setlist.filter((s) => s[0] !== songName));
 			const updatedHasPlayed = { ...hasPlayed };
-			delete updatedHasPlayed[song];
+			delete updatedHasPlayed[songName];
 			setHasPlayed(updatedHasPlayed);
 		}
 	}
@@ -111,10 +144,6 @@ export const SetlistContextProvider = ({
 
 	function resetSetlist() {
 		setSetlist([]);
-	}
-
-	function toggleHasPlayed(song: string) {
-		setHasPlayed({ ...hasPlayed, [song]: !hasPlayed[song] });
 	}
 
 	return (
@@ -141,10 +170,12 @@ export const SetlistContextProvider = ({
 
 export const useSetlist = (): SetlistContextType => {
 	const context = useContext(SetlistContext);
+
 	if (!context) {
 		throw new Error(
 			'useSetlist must be used within a <SetlistContextProvider />',
 		);
 	}
+
 	return context;
 };
