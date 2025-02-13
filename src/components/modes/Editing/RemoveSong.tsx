@@ -1,26 +1,33 @@
+import { useCatalog } from '@/context/catalog';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import type { TSong } from '@/types';
+
 type RemoveSongProps = {
-	song: string;
+	song: TSong;
 };
 
 function RemoveSong({ song }: RemoveSongProps) {
-	function confirmDelete() {
+	const songName = song[0];
+	const { removeSongFromCatalog } = useCatalog();
+
+	const confirmDelete = () => {
 		if (
 			confirm(
-				`Are you sure you want to DELETE ${song}?\nThis action cannot be undone.`,
+				`Are you sure you want to DELETE ${songName}?\nThis cannot be undone.`,
 			)
 		) {
-			alert(`${song} has been deleted.`);
+			removeSongFromCatalog(songName);
 		}
-	}
+	};
 
 	return (
 		<button
 			type='button'
-			className='RemoveSong min-w-4 flex-1 text-gray-500 transition-colors duration-300 hover:text-gray-900'
-			title={`Delete ${song} from Catalog`}
+			className='RemoveSong min-w-4 text-gray-500 mt-1 w-8 h-8 transition-colors duration-300 hover:text-gray-900'
+			title={`Delete ${songName} (from catalog)`}
 			onClick={confirmDelete}
 		>
 			<FontAwesomeIcon icon={faTrash} />
