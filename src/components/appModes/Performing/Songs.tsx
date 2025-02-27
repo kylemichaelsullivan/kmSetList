@@ -8,10 +8,10 @@ import { TSong } from '@/types';
 
 type SongsProps = {
 	songRefs: RefObject<(HTMLButtonElement | null)[]>;
-	resetSetlistRef: RefObject<HTMLButtonElement | null>;
+	restoreSetlistRef: RefObject<HTMLButtonElement | null>;
 };
 
-function Songs({ songRefs, resetSetlistRef }: SongsProps) {
+function Songs({ songRefs, restoreSetlistRef }: SongsProps) {
 	const { setlist } = useSetlist();
 
 	return (
@@ -26,7 +26,7 @@ function Songs({ songRefs, resetSetlistRef }: SongsProps) {
 						}
 					}}
 					songRefs={songRefs}
-					resetSetlistRef={resetSetlistRef}
+					restoreSetlistRef={restoreSetlistRef}
 				/>
 			))}
 		</div>

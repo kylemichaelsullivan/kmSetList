@@ -1,32 +1,32 @@
 import { ComponentType } from 'react';
 
-import Performing from '@/components/modes/Performing/Performing';
-import Selecting from '@/components/modes/Selecting/Selecting';
-import Editing from '@/components/modes/Editing/Editing';
+import Performing from '@/components/appModes/Performing/Performing';
+import Selecting from '@/components/appModes/Selecting/Selecting';
+import Editing from '@/components/appModes/Editing/Editing';
 
 import { useSettings } from '@/context/settings';
 import { SetlistContextProvider } from '@/context/setlist';
 
-import { _Modes } from '@/lookups';
-import { Modes } from '@/types';
+import { _AppModes } from '@/lookups';
+import { AppModes } from '@/types';
 
 function Main() {
-	const { mode } = useSettings();
+	const { appMode } = useSettings();
 
-	const modeComponents: Record<Modes, ComponentType> = {
+	const AppModeComponents: Record<AppModes, ComponentType> = {
 		Performing: Performing,
 		Selecting: Selecting,
 		Editing: Editing,
 	};
 
-	const ModeComponent = modeComponents[mode] || null;
+	const AppModeComponent = AppModeComponents[appMode as AppModes] || null;
 
 	return (
 		<SetlistContextProvider>
 			<main
-				className={`Main border-b border-black p-4 bg-${_Modes[mode][0]} text-${_Modes[mode][1]} print:border-0`}
+				className={`Main border-b border-black p-4 bg-${_AppModes[appMode][0]} text-${_AppModes[appMode][1]} print:border-0`}
 			>
-				{ModeComponent && <ModeComponent />}
+				{AppModeComponent && <AppModeComponent />}
 			</main>
 		</SetlistContextProvider>
 	);

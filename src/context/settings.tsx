@@ -6,13 +6,12 @@ import {
 	type ReactNode,
 } from 'react';
 
-import type { Modes } from '@/types';
+import type { AppModes } from '@/types';
 
 type SettingsContextType = {
-	mode: Modes;
-	handleModeChange: (Mode: Modes) => void;
-	switchToInitialMode: () => void;
-	switchToSelectingMode: () => void;
+	appMode: AppModes;
+	handleAppModeChange: (appMode: AppModes) => void;
+	switchToInitialAppMode: () => void;
 };
 
 const SettingsContext = createContext<SettingsContextType | undefined>(
@@ -23,30 +22,26 @@ type SettingsContextProviderProps = {
 	children: ReactNode;
 };
 
-const initialMode: Modes = 'Performing';
+const initialAppMode: AppModes = 'Performing';
 
 export const SettingsContextProvider = ({
 	children,
 }: SettingsContextProviderProps) => {
-	const [mode, setMode] = useState<Modes>(initialMode);
+	const [appMode, setAppMode] = useState<AppModes>(initialAppMode);
 
-	function handleModeChange(mode: Modes) {
-		setMode(mode);
+	function handleAppModeChange(appMode: AppModes) {
+		setAppMode(appMode);
 	}
 
-	// DEFAULT: "Selecting"
-	function switchToInitialMode() {
-		setMode(initialMode);
-	}
-
-	function switchToSelectingMode() {
-		setMode('Selecting');
+	// DEFAULT: "Performing"
+	function switchToInitialAppMode() {
+		setAppMode(initialAppMode);
 	}
 
 	useEffect(() => {
 		const handleKeyUp = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') {
-				switchToInitialMode();
+				switchToInitialAppMode();
 			}
 		};
 
@@ -60,10 +55,9 @@ export const SettingsContextProvider = ({
 	return (
 		<SettingsContext.Provider
 			value={{
-				mode,
-				handleModeChange,
-				switchToInitialMode,
-				switchToSelectingMode,
+				appMode,
+				handleAppModeChange,
+				switchToInitialAppMode,
 			}}
 		>
 			{children}

@@ -1,4 +1,4 @@
-export type Modes = 'Performing' | 'Selecting' | 'Editing';
+export type AppModes = 'Performing' | 'Selecting' | 'Editing';
 
 export type Notes =
 	| ''

@@ -9,11 +9,11 @@ import type { Notes, TSong } from '@/types';
 type SongProps = {
 	song: TSong;
 	songRefs: RefObject<(HTMLButtonElement | null)[]>;
-	resetSetlistRef: RefObject<HTMLButtonElement | null>;
+	restoreSetlistRef: RefObject<HTMLButtonElement | null>;
 };
 
 const Song = forwardRef<HTMLButtonElement, SongProps>(
-	({ song, songRefs, resetSetlistRef }, ref) => {
+	({ song, songRefs, restoreSetlistRef }, ref) => {
 		const { setlist, hasPlayed, toggleHasPlayed } = useSetlist();
 		const [songName, key, bpm] = song;
 
@@ -35,7 +35,7 @@ const Song = forwardRef<HTMLButtonElement, SongProps>(
 					const nextSongRef = songRefs.current[nextSongIndex];
 					nextSongRef?.focus();
 				} else {
-					resetSetlistRef.current?.focus();
+					restoreSetlistRef.current?.focus();
 				}
 			}
 		};

@@ -1,5 +1,5 @@
 import Songs from './Songs';
-import ResetSetlist from './ResetSetlist';
+import RestoreSetlist from './RestoreSetlist';
 import NoSongs from '@/components/NoSongs';
 
 import { useSetlist } from '@/context/setlist';
@@ -8,7 +8,7 @@ import { useRef, useEffect } from 'react';
 function Performing() {
 	const { setlist } = useSetlist();
 	const songRefs = useRef<(HTMLButtonElement | null)[]>([]);
-	const resetSetlistRef = useRef<HTMLButtonElement | null>(null);
+	const restoreSetlistRef = useRef<HTMLButtonElement | null>(null);
 
 	const focusFirstSong = () => {
 		if (songRefs.current[0]) {
@@ -44,8 +44,8 @@ function Performing() {
 		<div className='Performing flex w-full flex-col items-center gap-4 p-4'>
 			{setlist.length > 0 ? (
 				<>
-					<Songs songRefs={songRefs} resetSetlistRef={resetSetlistRef} />
-					<ResetSetlist ref={resetSetlistRef} onReset={focusFirstSong} />
+					<Songs songRefs={songRefs} restoreSetlistRef={restoreSetlistRef} />
+					<RestoreSetlist ref={restoreSetlistRef} onRestore={focusFirstSong} />
 				</>
 			) : (
 				<NoSongs />
