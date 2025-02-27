@@ -1,7 +1,11 @@
+import { useUser } from '@/context/user';
+
 function User() {
+	const { callMe } = useUser();
+
 	return (
 		<div className='User'>
-			<h1>User</h1>
+			<h1>{`Hi ${callMe}!`}</h1>
 		</div>
 	);
 }

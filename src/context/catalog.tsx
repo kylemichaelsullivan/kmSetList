@@ -5,7 +5,6 @@ import type { TSongs } from '@/types';
 type CatalogContextType = {
 	catalog: TSongs;
 	handleCatalogChange: () => void;
-	addSongToCatalog: () => void;
 	toggleSongInCatalog: (songName: string) => void;
 	removeSongFromCatalog: (songName: string) => void;
 	resetCatalog: () => void;
@@ -46,10 +45,6 @@ export const CatalogContextProvider = ({
 		setCatalog(catalog);
 	}
 
-	function addSongToCatalog() {
-		setCatalog([...catalog, ['', '', 120, true, Date.now()]]);
-	}
-
 	function removeSongFromCatalog(songName: string) {
 		const updatedCatalog = catalog.filter((song) => song[0] !== songName);
 
@@ -86,7 +81,6 @@ export const CatalogContextProvider = ({
 			value={{
 				catalog,
 				handleCatalogChange,
-				addSongToCatalog,
 				removeSongFromCatalog,
 				resetCatalog,
 				toggleSongInCatalog,

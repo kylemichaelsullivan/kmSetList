@@ -1,22 +1,24 @@
-import { useState } from 'react';
-
-import type { TSong } from '@/types';
-
 import Title from './Title';
 import Meta from './Meta';
+import SongNoteEditor from './SongNoteEditor';
+
+import type { TSong } from '@/types';
 
 type SongDetailsProps = {
 	song: TSong;
 	isActive: boolean;
+	isExpanded: boolean;
+	isEditing: boolean;
+	toggleIsExpanded: () => void;
 };
 
-function SongDetails({ song, isActive }: SongDetailsProps) {
-	const [isExpanded, setIsExpanded] = useState(false);
-
-	const toggleIsExpanded = () => {
-		setIsExpanded(!isExpanded);
-	};
-
+function SongDetails({
+	song,
+	isActive,
+	isExpanded,
+	isEditing,
+	toggleIsExpanded,
+}: SongDetailsProps) {
 	return (
 		<div className='SongDetails flex flex-col gap-2 w-full'>
 			<Title
@@ -27,6 +29,7 @@ function SongDetails({ song, isActive }: SongDetailsProps) {
 			/>
 
 			{isActive && isExpanded && <Meta song={song} />}
+			{isActive && isExpanded && isEditing && <SongNoteEditor song={song} />}
 		</div>
 	);
 }
