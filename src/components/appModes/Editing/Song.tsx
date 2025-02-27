@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useCatalog } from '@/context/catalog';
 
-import ToggleSong from './ToggleSong';
+import ToggleSongIsActive from './ToggleSongIsActive';
 import SongDetails from './SongDetails';
 import SongActions from './SongActions';
 
@@ -19,6 +19,14 @@ function Song({ song }: SongProps) {
 
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
+
+	const toggleIsActive = (songName: string) => {
+		if (!isActive) {
+			setIsExpanded(false);
+			setIsEditing(false);
+		}
+		toggleSongInCatalog(songName);
+	};
 
 	const toggleIsExpanded = () => {
 		if (isExpanded) {
@@ -40,10 +48,10 @@ function Song({ song }: SongProps) {
 
 	return (
 		<div className='Song group flex w-full gap-4'>
-			<ToggleSong
+			<ToggleSongIsActive
 				songName={songName}
 				isActive={isActive}
-				toggleSong={() => toggleSongInCatalog(songName)}
+				toggleIsActive={() => toggleIsActive(songName)}
 			/>
 
 			<SongDetails
