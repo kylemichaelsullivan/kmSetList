@@ -1,9 +1,9 @@
-import { useSettings } from '@/context/settings';
+import { useAppMode } from '@/context/appMode';
 
 function NoSongs() {
-	const { mode } = useSettings();
+	const { appMode } = useAppMode();
 
-	const isEditing = mode === 'Editing';
+	const isEditing = appMode === 'Editing';
 
 	return (
 		<p className='NoSongs text-center'>{`Please add songs to your ${isEditing ? 'catalog' : 'setlist'}.`}</p>

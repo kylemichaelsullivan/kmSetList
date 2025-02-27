@@ -6,30 +6,28 @@ import {
 	type ReactNode,
 } from 'react';
 
-import type { AppModes } from '@/types';
+import type { AppModes, AllAppModes } from '@/types';
 
-type SettingsContextType = {
-	appMode: AppModes;
-	handleAppModeChange: (appMode: AppModes) => void;
+type AppModeContextType = {
+	appMode: AllAppModes;
+	handleAppModeChange: (appMode: AllAppModes) => void;
 	switchToInitialAppMode: () => void;
 };
 
-const SettingsContext = createContext<SettingsContextType | undefined>(
-	undefined,
-);
+const AppModeContext = createContext<AppModeContextType | undefined>(undefined);
 
-type SettingsContextProviderProps = {
+type AppModeContextProviderProps = {
 	children: ReactNode;
 };
 
 const initialAppMode: AppModes = 'Performing';
 
-export const SettingsContextProvider = ({
+export const AppModeContextProvider = ({
 	children,
-}: SettingsContextProviderProps) => {
-	const [appMode, setAppMode] = useState<AppModes>(initialAppMode);
+}: AppModeContextProviderProps) => {
+	const [appMode, setAppMode] = useState<AllAppModes>(initialAppMode);
 
-	function handleAppModeChange(appMode: AppModes) {
+	function handleAppModeChange(appMode: AllAppModes) {
 		setAppMode(appMode);
 	}
 
@@ -53,7 +51,7 @@ export const SettingsContextProvider = ({
 	}, []);
 
 	return (
-		<SettingsContext.Provider
+		<AppModeContext.Provider
 			value={{
 				appMode,
 				handleAppModeChange,
@@ -61,15 +59,15 @@ export const SettingsContextProvider = ({
 			}}
 		>
 			{children}
-		</SettingsContext.Provider>
+		</AppModeContext.Provider>
 	);
 };
 
-export const useSettings = (): SettingsContextType => {
-	const context = useContext(SettingsContext);
+export const useAppMode = (): AppModeContextType => {
+	const context = useContext(AppModeContext);
 	if (!context) {
 		throw new Error(
-			'useSettings must be used within an <SettingsContextProvider />',
+			'useAppMode must be used within an <AppModeContextProvider />',
 		);
 	}
 	return context;

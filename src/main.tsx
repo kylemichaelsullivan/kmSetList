@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { SettingsContextProvider } from '@/context/settings.tsx';
+import { AppModeContextProvider } from '@/context/appMode';
 
 import App from '@/App.tsx';
 
@@ -9,8 +9,8 @@ import '@/index.css';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<SettingsContextProvider>
+		<AppModeContextProvider>
 			<App />
-		</SettingsContextProvider>
+		</AppModeContextProvider>
 	</StrictMode>,
 );

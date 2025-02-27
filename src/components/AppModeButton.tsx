@@ -1,4 +1,4 @@
-import { useSettings } from '@/context/settings';
+import { useAppMode } from '@/context/appMode';
 
 import type { ReactNode } from 'react';
 import type { AppModes } from '@/types';
@@ -10,9 +10,13 @@ type AppModeButtonProps = {
 };
 
 function AppModeButton({ label, colors, icon }: AppModeButtonProps) {
-	const { handleAppModeChange } = useSettings();
+	const { handleAppModeChange } = useAppMode();
 
 	const [bg, color] = colors;
+
+	if (!icon) {
+		return;
+	}
 
 	return (
 		<button

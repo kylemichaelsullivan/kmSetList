@@ -1,13 +1,17 @@
+import { useAppMode } from '@/context/appMode';
+
 function UserAvatar() {
+	const { handleAppModeChange } = useAppMode();
+
 	return (
-		<a
-			href='https://github.com/kylemichaelsullivan'
+		<button
+			type='button'
 			className='UserAvatar flex justify-center items-center border border-black rounded-full w-8 h-8 hover:ring'
-			target='_blank'
 			title='Hi Kyle!'
+			onClick={() => handleAppModeChange('User')}
 		>
 			K
-		</a>
+		</button>
 	);
 }
 
