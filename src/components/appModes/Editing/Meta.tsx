@@ -1,19 +1,44 @@
-import type { TSong } from '@/types';
+import { memo, useCallback } from 'react';
 
-import Key from './Key';
+import type { Song, SongKey as TSongKey } from '@/types';
+
+import SongKey from './SongKey';
 import Tempo from './Tempo';
 
-type MetaProps = {
-	song: TSong;
-};
+interface MetaProps {
+	song: Song;
+	isExpanded: boolean;
+	onUpdate: (updates: Partial<Song>) => void;
+}
 
-function Meta({ song }: MetaProps) {
+const Meta = memo(({ song, isExpanded, onUpdate }: MetaProps) => {
+	const handleSongKeyChange = useCallback(
+		(songKey: TSongKey) => {
+			onUpdate({ songKey });
+		},
+		[onUpdate],
+	);
+
+	const handleTempoChange = useCallback(
+		(bpm: number) => {
+			onUpdate({ bpm });
+		},
+		[onUpdate],
+	);
+
 	return (
-		<div className='Meta flex gap-2 w-full'>
-			<Key note={song[1]} />
-			<Tempo bpm={Number(song[2])} />
+		<div
+			className={`Meta ${song.isActive && isExpanded ? 'flex' : 'hidden'} gap-2 w-full`}
+		>
+			<SongKey
+				note={song.songKey}
+				songName={song.name}
+				onChange={handleSongKeyChange}
+			/>
+
+			<Tempo bpm={song.bpm} songName={song.name} onChange={handleTempoChange} />
 		</div>
 	);
-}
+});
 
 export default Meta;

@@ -1,6 +1,6 @@
 import type { Notes } from '@/types';
 
-import Key from './Key';
+import SongKey from './SongKey';
 import Tempo from './Tempo';
 
 type MetaProps = {
@@ -11,7 +11,7 @@ type MetaProps = {
 function Meta({ note, bpm }: MetaProps) {
 	return (
 		<div className='Meta flex gap-2'>
-			<Key note={note} />
+			<SongKey note={note} />
 			<span>|</span>
 			<Tempo bpm={bpm} />
 		</div>
