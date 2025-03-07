@@ -39,7 +39,7 @@ function AddSong() {
 
 	useEffect(() => {
 		if (catalog && setlist) {
-			setUnselectedSongs(getUnselectedSongs().map((song) => song[0]));
+			setUnselectedSongs(getUnselectedSongs().map((song) => song.name));
 		}
 	}, [catalog, setlist]);
 

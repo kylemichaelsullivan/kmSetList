@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons/faCaretRight';
 
@@ -8,7 +10,7 @@ type TitleProps = {
 	toggleIsExpanded: () => void;
 };
 
-function Title({
+const Title = memo(function Title({
 	songName,
 	isActive,
 	isExpanded,
@@ -38,6 +40,6 @@ function Title({
 			</button>
 		</div>
 	);
-}
+});
 
 export default Title;
