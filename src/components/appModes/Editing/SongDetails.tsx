@@ -1,37 +1,54 @@
+import { memo } from 'react';
+
 import Title from './Title';
 import Meta from './Meta';
 import SongNoteEditor from './SongNoteEditor';
 
-import type { TSong } from '@/types';
+import type { Song } from '@/types';
 
-type SongDetailsProps = {
-	song: TSong;
-	isActive: boolean;
+interface SongDetailsProps {
+	song: Song;
 	isExpanded: boolean;
 	isEditing: boolean;
 	toggleIsExpanded: () => void;
-};
-
-function SongDetails({
-	song,
-	isActive,
-	isExpanded,
-	isEditing,
-	toggleIsExpanded,
-}: SongDetailsProps) {
-	return (
-		<div className='SongDetails flex flex-col gap-2 w-full'>
-			<Title
-				songName={song[0]}
-				isActive={isActive}
-				isExpanded={isExpanded}
-				toggleIsExpanded={toggleIsExpanded}
-			/>
-
-			{isActive && isExpanded && <Meta song={song} />}
-			{isActive && isExpanded && isEditing && <SongNoteEditor song={song} />}
-		</div>
-	);
+	onUpdate?: (updates: Partial<Song>) => void;
 }
+
+const SongDetails = memo(
+	({
+		song,
+		isExpanded,
+		isEditing,
+		toggleIsExpanded,
+		onUpdate,
+	}: SongDetailsProps) => {
+		return (
+			<div className='SongDetails flex flex-col gap-2 w-full'>
+				<Title
+					songName={song.name}
+					isActive={song.isActive}
+					isExpanded={isExpanded}
+					toggleIsExpanded={toggleIsExpanded}
+				/>
+
+				{/* {song.isActive && isExpanded && ( */}
+				<Meta
+					song={song}
+					isExpanded={isExpanded}
+					onUpdate={onUpdate || (() => {})}
+				/>
+				{/* )} */}
+
+				{/* {song.isActive && isExpanded && isEditing && ( */}
+				<SongNoteEditor
+					song={song}
+					isExpanded={isExpanded}
+					isEditing={isEditing}
+				/>
+				{/* )} */}
+			</div>
+		);
+	},
+);
 
 export default SongDetails;

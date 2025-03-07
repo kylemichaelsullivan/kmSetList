@@ -1,31 +1,39 @@
+import { memo } from 'react';
+import { useSong } from '@/context/song';
+
 import RemoveSong from './RemoveSong';
-import EditSongNotes from '@/components/appModes/Editing/EditSongNotes';
+import ToggleSongNotes from '@/components/appModes/Editing/ToggleSongNotes';
 
-import { TSong } from '@/types';
+import type { Song } from '@/types';
 
-type SongActionsProps = {
-	song: TSong;
-	isActive: boolean;
+interface SongActionsProps {
+	song: Song;
 	isExpanded: boolean;
-	toggleIsEditing: () => void;
-};
-
-function SongActions({
-	song,
-	isActive,
-	isExpanded,
-	toggleIsEditing,
-}: SongActionsProps) {
-	return (
-		<div className='SongActions flex flex-col gap-4 items-center justify-start'>
-			<RemoveSong song={song} />
-			{isActive && isExpanded ? (
-				<EditSongNotes song={song} toggleIsEditing={toggleIsEditing} />
-			) : (
-				''
-			)}
-		</div>
-	);
+	isEditing: boolean;
 }
+
+const SongActions = memo(
+	({ song, isExpanded, isEditing }: SongActionsProps) => {
+		const { songStates, toggleEditing, setSongStates } = useSong();
+		const { noteContent } = songStates[song.name] || {};
+
+		const hasNote = noteContent?.trim().length > 0;
+
+		return (
+			<div className='SongActions flex flex-col gap-4 items-center justify-start'>
+				<RemoveSong song={song} />
+
+				{song.isActive && isExpanded ? (
+					<ToggleSongNotes
+						song={song}
+						isEditing={isEditing}
+						hasNote={hasNote}
+						toggleIsEditing={() => toggleEditing(song.name)}
+					/>
+				) : null}
+			</div>
+		);
+	},
+);
 
 export default SongActions;

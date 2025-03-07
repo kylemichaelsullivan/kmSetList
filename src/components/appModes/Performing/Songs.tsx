@@ -4,7 +4,7 @@ import { useSetlist } from '@/context/setlist';
 
 import Song from './Song';
 
-import { TSong } from '@/types';
+import { Song as TSong } from '@/types';
 
 type SongsProps = {
 	songRefs: RefObject<(HTMLButtonElement | null)[]>;
@@ -19,7 +19,6 @@ function Songs({ songRefs, restoreSetlistRef }: SongsProps) {
 			{setlist.map((song: TSong, index: number) => (
 				<Song
 					song={song}
-					key={index}
 					ref={(el: HTMLButtonElement | null) => {
 						if (songRefs.current) {
 							songRefs.current[index] = el;
@@ -27,6 +26,7 @@ function Songs({ songRefs, restoreSetlistRef }: SongsProps) {
 					}}
 					songRefs={songRefs}
 					restoreSetlistRef={restoreSetlistRef}
+					key={song.updatedAt}
 				/>
 			))}
 		</div>

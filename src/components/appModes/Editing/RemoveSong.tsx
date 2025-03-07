@@ -1,25 +1,24 @@
-import { useCatalog } from '@/context/catalog';
-
+import { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import type { TSong } from '@/types';
+import { useCatalog } from '@/context/catalog';
+import type { Song } from '@/types';
 
-type RemoveSongProps = {
-	song: TSong;
-};
+interface RemoveSongProps {
+	song: Song;
+}
 
-function RemoveSong({ song }: RemoveSongProps) {
-	const songName = song[0];
+const RemoveSong = memo(({ song }: RemoveSongProps) => {
 	const { removeSongFromCatalog } = useCatalog();
 
 	const confirmDelete = () => {
 		if (
 			confirm(
-				`Are you sure you want to DELETE ${songName}?\nThis cannot be undone.`,
+				`Are you sure you want to DELETE ${song.name}?\nThis cannot be undone.`,
 			)
 		) {
-			removeSongFromCatalog(songName);
+			removeSongFromCatalog(song.name);
 		}
 	};
 
@@ -27,12 +26,12 @@ function RemoveSong({ song }: RemoveSongProps) {
 		<button
 			type='button'
 			className='RemoveSong min-w-4 text-gray-500 mt-1 w-8 h-8 transition-colors duration-300 hover:text-gray-900'
-			title={`Delete ${songName} (from catalog)`}
+			title={`Delete ${song.name} (from catalog)`}
 			onClick={confirmDelete}
 		>
 			<FontAwesomeIcon icon={faTrash} />
 		</button>
 	);
-}
+});
 
 export default RemoveSong;

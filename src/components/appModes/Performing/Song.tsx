@@ -4,10 +4,10 @@ import { useSetlist } from '@/context/setlist';
 
 import Meta from './Meta';
 
-import type { Notes, TSong } from '@/types';
+import type { Notes, Song } from '@/types';
 
 type SongProps = {
-	song: TSong;
+	song: Song;
 	songRefs: RefObject<(HTMLButtonElement | null)[]>;
 	restoreSetlistRef: RefObject<HTMLButtonElement | null>;
 };
@@ -15,12 +15,12 @@ type SongProps = {
 const Song = forwardRef<HTMLButtonElement, SongProps>(
 	({ song, songRefs, restoreSetlistRef }, ref) => {
 		const { setlist, hasPlayed, toggleHasPlayed } = useSetlist();
-		const [songName, key, bpm] = song;
+		const { name, songKey, bpm } = song;
 
 		const handleClick = () => {
-			toggleHasPlayed(songName);
-			if (!hasPlayed[songName]) {
-				const thisSongIndex = setlist.findIndex((s) => s[0] === songName);
+			toggleHasPlayed(name);
+			if (!hasPlayed[name]) {
+				const thisSongIndex = setlist.findIndex((s: Song) => s.name === name);
 				const thisSong =
 					thisSongIndex < setlist.length ? setlist[thisSongIndex] : null;
 
@@ -29,7 +29,7 @@ const Song = forwardRef<HTMLButtonElement, SongProps>(
 					nextSongIndex < setlist.length ? setlist[nextSongIndex] : null;
 
 				if (thisSong) {
-					toggleHasPlayed(thisSong[0]);
+					toggleHasPlayed(thisSong.name);
 				}
 				if (nextSong && songRefs.current) {
 					const nextSongRef = songRefs.current[nextSongIndex];
@@ -44,12 +44,12 @@ const Song = forwardRef<HTMLButtonElement, SongProps>(
 			<button
 				type='button'
 				ref={ref}
-				className={`Song flex justify-between w-full cursor-pointer rounded-md border border-transparent px-4 shadow-md py-2 transition duration-200 ease-in-out${hasPlayed[songName] ? ' played' : ''} hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 print:text-black`}
-				title={`${hasPlayed[songName] ? 'Enable' : 'Disable'} ${songName}`}
+				className={`Song flex justify-between w-full cursor-pointer rounded-md border border-transparent px-4 shadow-md py-2 transition duration-200 ease-in-out${hasPlayed[name] ? ' played' : ''} hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 print:text-black`}
+				title={`${hasPlayed[name] ? 'Enable' : 'Disable'} ${name}`}
 				onClick={handleClick}
 			>
-				{songName}
-				<Meta note={key as Notes} bpm={bpm} />
+				{name}
+				<Meta note={songKey as Notes} bpm={bpm} />
 			</button>
 		);
 	},
