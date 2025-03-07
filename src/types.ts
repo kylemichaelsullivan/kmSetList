@@ -21,7 +21,7 @@ export type Notes =
 	| 'Bb'
 	| 'B';
 
-type SongKey =
+export type SongKey =
 	| Notes
 	| 'Cm'
 	| 'C#m'
@@ -41,10 +41,10 @@ type SongKey =
 	| 'Bbm'
 	| 'Bm';
 
-type SongName = string;
-type SongBpm = number;
-type SongActive = boolean;
-type SongUpdated = number;
-
-export type TSong = [SongName, SongKey, SongBpm, SongActive, SongUpdated];
-export type TSongs = TSong[];
+export interface Song {
+	name: string;
+	songKey: SongKey;
+	bpm: number;
+	isActive: boolean;
+	updatedAt: number;
+}

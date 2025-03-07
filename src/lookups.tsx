@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+
 import type { AllAppModes } from '@/types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,4 +16,9 @@ export const _AppModes: AppModeColors = {
 	Selecting: ['yellow-400', 'black', <FontAwesomeIcon icon={faHandPointer} />],
 	Editing: ['red-400', 'blue-400', <FontAwesomeIcon icon={faPen} />],
 	User: ['blue-500', 'white', null],
+};
+
+export const BPM = {
+	min: 1,
+	max: 300,
 };
