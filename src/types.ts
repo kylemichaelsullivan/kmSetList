@@ -48,3 +48,5 @@ export interface Song {
 	isActive: boolean;
 	updatedAt: number;
 }
+
+export type PerformanceMode = 'Focus' | 'Original';

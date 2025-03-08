@@ -1,11 +1,14 @@
+import { useRef, useEffect } from 'react';
+
+// import { useUser } from '@/context/user';
+import { useSetlist } from '@/context/setlist';
+
 import Songs from './Songs';
 import RestoreSetlist from './RestoreSetlist';
 import NoSongs from '@/components/NoSongs';
 
-import { useSetlist } from '@/context/setlist';
-import { useRef, useEffect } from 'react';
-
 function Performing() {
+	// const { performanceMode } = useUser();
 	const { setlist } = useSetlist();
 	const songRefs = useRef<(HTMLButtonElement | null)[]>([]);
 	const restoreSetlistRef = useRef<HTMLButtonElement | null>(null);
@@ -46,6 +49,7 @@ function Performing() {
 				<>
 					<Songs songRefs={songRefs} restoreSetlistRef={restoreSetlistRef} />
 					<RestoreSetlist ref={restoreSetlistRef} onRestore={focusFirstSong} />
+					{/* <p className='hidden'>{performanceMode}</p> */}
 				</>
 			) : (
 				<NoSongs />

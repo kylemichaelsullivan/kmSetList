@@ -44,7 +44,7 @@ const Song = forwardRef<HTMLButtonElement, SongProps>(
 			<button
 				type='button'
 				ref={ref}
-				className={`Song flex justify-between w-full cursor-pointer rounded-md border border-transparent px-4 shadow-md py-2 transition duration-200 ease-in-out${hasPlayed[name] ? ' played' : ''} hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 print:text-black`}
+				className={`Song flex justify-between w-full rounded-md border border-transparent px-4 shadow-md py-2 transition duration-200 ease-in-out${hasPlayed[name] ? ' played' : ''} hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 print:text-black`}
 				title={`${hasPlayed[name] ? 'Enable' : 'Disable'} ${name}`}
 				onClick={handleClick}
 			>
