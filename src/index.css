@@ -10,6 +10,10 @@
 		no-repeat center center;
 }
 
+label {
+	cursor: pointer;
+}
+
 /* should be in Tailwind */
 .cursor-grab {
 	cursor: grab;
@@ -22,6 +26,7 @@
 .cursor-no-drop {
 	cursor: no-drop;
 }
+/* / should be in Tailwind */
 
 .Main {
 	min-height: calc(100dvh - 8rem);
@@ -32,6 +37,10 @@
 }
 
 /* Performing */
+.Performing .Song {
+	cursor: pointer;
+}
+
 .Performing .SliderReset::before {
 	position: absolute;
 	content: 'Slide to Reset';
@@ -132,3 +141,34 @@
 }
 
 /* Editing */
+
+/* User */
+.User .SettingsForm label {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.User .SettingsForm label span + * {
+	border: 1px solid transparent;
+}
+
+.User .SettingsForm label:is(:hover, :focus) span + * {
+	border-color: #000000;
+}
+
+.User .SettingsForm label input,
+.User .SettingsForm label select {
+	flex: 1 1 auto;
+	padding: 0.5rem 1rem;
+}
+
+@media (min-width: 1200px) {
+	.User .SettingsForm label {
+		flex-direction: row;
+	}
+
+	.User .SettingsForm label span {
+		padding-top: 0.5rem;
+	}
+}
