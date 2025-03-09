@@ -1,46 +1,77 @@
-import { useState, type RefObject } from 'react';
+import { useEffect, type RefObject } from 'react';
+
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { BPM } from '@/lookups';
 
+import type { AddSongFormData } from '@/types';
+
 type AddSongFieldsProps = {
 	isAdding: boolean;
+	addSongFormRef: RefObject<HTMLFormElement>;
 	addSongSongRef: RefObject<HTMLInputElement>;
+	onSubmit: SubmitHandler<AddSongFormData>;
 };
 
-function AddSongFields({ isAdding, addSongSongRef }: AddSongFieldsProps) {
-	const [songName, setSongName] = useState('');
+function AddSongFields({
+	isAdding,
+	addSongFormRef,
+	addSongSongRef,
+	onSubmit,
+}: AddSongFieldsProps) {
+	const { register, handleSubmit, reset } = useForm<AddSongFormData>();
+
+	const handleFormSubmit: SubmitHandler<AddSongFormData> = (data) => {
+		onSubmit(data);
+		reset();
+	};
+
+	const { ref: songNameRef, ...songNameRest } = register('songName', {
+		required: true,
+	});
+
+	useEffect(() => {
+		if (addSongSongRef.current) {
+			addSongSongRef.current.focus();
+		}
+	}, [addSongSongRef]);
 
 	return (
-		<div
+		<form
+			onSubmit={handleSubmit(handleFormSubmit)}
 			className={`AddSongFields ${isAdding ? 'flex' : 'hidden'} flex-col gap-2 w-full group`}
+			ref={addSongFormRef}
 		>
 			<input
 				type='text'
 				className='border border-current text-black w-full px-4 py-2 shadow-lg ring-blue-500 group-hover:ring'
-				value={songName}
-				onChange={(e) => setSongName(e.target.value)}
-				placeholder='Song'
-				ref={addSongSongRef}
+				placeholder='Song (Required)'
+				{...songNameRest}
+				ref={(e) => {
+					songNameRef(e);
+					if (addSongSongRef) {
+						// @ts-ignore (not read-only)
+						addSongSongRef.current = e;
+					}
+				}}
 			/>
 
 			<input
 				type='text'
 				className='border border-current text-black w-full px-4 py-2 shadow-lg ring-blue-500 group-hover:ring'
+				{...register('songKey')}
 				placeholder='Key'
 			/>
 
 			<input
 				type='number'
 				className='border border-current text-black w-full px-4 py-2 shadow-lg ring-blue-500 group-hover:ring'
+				{...register('bpm')}
 				placeholder='Tempo'
-				// onChange={handleChange}
-				// className='Tempo flex-1 rounded-md border border-current px-4 py-2 shadow-lg ring-blue-500 group-hover:ring'
 				min={BPM.min}
 				max={BPM.max}
-				// aria-label={`Tempo for ${songName}`}
-				// aria-invalid={!isValidBpm(bpm)}
 			/>
-		</div>
+		</form>
 	);
 }
 

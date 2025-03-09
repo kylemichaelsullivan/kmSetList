@@ -5,23 +5,17 @@ import { faPlus, faThumbTack } from '@fortawesome/free-solid-svg-icons';
 
 type AddSongButtonProps = {
 	isAdding: boolean;
-	toggleIsAdding: () => void;
-	handleAddSong: () => void;
+	handleAddSongButtonClick: () => void;
 	addSongSongRef: RefObject<HTMLInputElement>;
 };
 
 function AddSongButton({
 	isAdding,
-	toggleIsAdding,
-	handleAddSong,
+	handleAddSongButtonClick,
 	addSongSongRef,
 }: AddSongButtonProps) {
 	const handleClick = async () => {
-		if (isAdding) {
-			toggleIsAdding();
-			return;
-		}
-		handleAddSong();
+		handleAddSongButtonClick();
 
 		// ensure ref/input exist after React updates the DOM
 		await new Promise((resolve) => setTimeout(resolve, 1));

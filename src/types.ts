@@ -49,4 +49,10 @@ export interface Song {
 	updatedAt: number;
 }
 
+export interface AddSongFormData {
+	songName: string;
+	songKey: string;
+	bpm: number;
+}
+
 export type PerformanceMode = 'Focus' | 'Original';
