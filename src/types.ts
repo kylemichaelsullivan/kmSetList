@@ -1,4 +1,4 @@
-export type AppModes = 'Performing' | 'Selecting' | 'Editing';
+export type AppModes = 'Playing' | 'Selecting' | 'Editing';
 export type AllAppModes = AppModes | 'User';
 
 export type Notes =
@@ -55,4 +55,10 @@ export interface AddSongFormData {
 	bpm: number;
 }
 
-export type PerformanceMode = 'Focus' | 'Original';
+export type PlayingMode = 'perform' | 'rehearse' | 'focus';
+
+export interface SettingsFormData {
+	callMe: string;
+	email: string;
+	playingMode: PlayingMode;
+}

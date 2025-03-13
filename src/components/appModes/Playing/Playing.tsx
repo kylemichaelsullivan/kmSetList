@@ -1,15 +1,20 @@
 import { useRef, useEffect } from 'react';
 
-// import { useUser } from '@/context/user';
 import { useSetlist } from '@/context/setlist';
+import { useUser } from '@/context/user';
+
+import Perform from './playingModes/Perform';
+import Rehearse from './playingModes/Rehearse';
+import Focus from './playingModes/Focus';
 
 import Songs from './Songs';
 import RestoreSetlist from './RestoreSetlist';
 import NoSongs from '@/components/NoSongs';
 
-function Performing() {
-	// const { performanceMode } = useUser();
+function Playing() {
 	const { setlist } = useSetlist();
+	const { playingMode } = useUser();
+
 	const songRefs = useRef<(HTMLButtonElement | null)[]>([]);
 	const restoreSetlistRef = useRef<HTMLButtonElement | null>(null);
 
@@ -44,12 +49,14 @@ function Performing() {
 	}, [setlist]);
 
 	return (
-		<div className='Performing flex w-full flex-col items-center gap-4 p-4'>
+		<div className='Playing flex w-full flex-col items-center gap-4 p-4'>
 			{setlist.length > 0 ? (
 				<>
+					{playingMode === 'perform' && <Perform />}
+					{playingMode === 'rehearse' && <Rehearse />}
+					{playingMode === 'focus' && <Focus />}
 					<Songs songRefs={songRefs} restoreSetlistRef={restoreSetlistRef} />
 					<RestoreSetlist ref={restoreSetlistRef} onRestore={focusFirstSong} />
-					{/* <p className='hidden'>{performanceMode}</p> */}
 				</>
 			) : (
 				<NoSongs />
@@ -58,4 +65,4 @@ function Performing() {
 	);
 }
 
-export default Performing;
+export default Playing;

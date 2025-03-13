@@ -1,6 +1,7 @@
 import { type RefObject } from 'react';
 
 import { useSetlist } from '@/context/setlist';
+import { useUser } from '@/context/user';
 
 import Song from './Song';
 
@@ -12,10 +13,13 @@ type SongsProps = {
 };
 
 function Songs({ songRefs, restoreSetlistRef }: SongsProps) {
+	const { playingMode } = useUser();
 	const { setlist } = useSetlist();
 
 	return (
-		<div className='Songs flex w-full flex-col gap-4'>
+		<div
+			className={`Songs flex w-full flex-col gap-4 ${playingMode ?? 'perform'}-mode`}
+		>
 			{setlist.map((song: TSong, index: number) => (
 				<Song
 					song={song}

@@ -20,7 +20,7 @@ type AppModeContextProviderProps = {
 	children: ReactNode;
 };
 
-const initialAppMode: AppModes = 'Performing';
+const initialAppMode: AppModes = 'Playing';
 
 export const AppModeContextProvider = ({
 	children,
@@ -31,7 +31,7 @@ export const AppModeContextProvider = ({
 		setAppMode(appMode);
 	}
 
-	// DEFAULT: "Performing"
+	// DEFAULT: "Playing"
 	function switchToInitialAppMode() {
 		setAppMode(initialAppMode);
 	}

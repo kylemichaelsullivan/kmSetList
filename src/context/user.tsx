@@ -1,19 +1,19 @@
 import { useState, createContext, useContext } from 'react';
 import type { ChangeEvent, ReactNode, SetStateAction } from 'react';
 
-import type { PerformanceMode } from '@/types';
+import type { PlayingMode } from '@/types';
 
 type UserContextType = {
 	callMe: string;
 	email: string;
-	performanceMode: PerformanceMode;
+	playingMode: PlayingMode;
 	myProjects: string[];
 	activeProjectIndex: number;
-	handlePerformanceModeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+	handlePlayingModeChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 	handleUserChange: (
 		callMe: string,
 		email: string,
-		performanceMode: PerformanceMode,
+		playingMode: PlayingMode,
 	) => void;
 	handleActiveProjectIndexChange: (index: number) => void;
 };
@@ -26,7 +26,7 @@ type UserContextProviderProps = {
 
 const initialCallMe = 'Kyle';
 const initialEmail = 'kyle@example.com';
-const initialPerformanceMode = 'Focus';
+const initialPlayingMode: PlayingMode = 'perform';
 const initialMyProjects = [
 	'Julio Gomez Jazz Collective',
 	'Old Mountain Acid Test',
@@ -37,9 +37,8 @@ const initialActiveProjectIndex = 2;
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 	const [callMe, setCallMe] = useState(initialCallMe);
 	const [email, setEmail] = useState(initialEmail);
-	const [performanceMode, setPerformanceMode] = useState<PerformanceMode>(
-		initialPerformanceMode,
-	);
+	const [playingMode, setPlayingMode] =
+		useState<PlayingMode>(initialPlayingMode);
 	const [myProjects, setMyProjects] = useState(initialMyProjects);
 	const [activeProjectIndex, setActiveProjectIndex] = useState(
 		initialActiveProjectIndex,
@@ -48,15 +47,15 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 	function handleUserChange(
 		callMe: SetStateAction<string>,
 		email: SetStateAction<string>,
-		performanceMode: SetStateAction<PerformanceMode>,
+		playingMode: SetStateAction<PlayingMode>,
 	) {
 		setCallMe(callMe);
 		setEmail(email);
-		setPerformanceMode(performanceMode as PerformanceMode);
+		setPlayingMode(playingMode as PlayingMode);
 	}
 
-	function handlePerformanceModeChange(e: ChangeEvent<HTMLSelectElement>) {
-		setPerformanceMode(e.target.value as PerformanceMode);
+	function handlePlayingModeChange(e: ChangeEvent<HTMLSelectElement>) {
+		setPlayingMode(e.target.value as PlayingMode);
 	}
 
 	function handleMyProjectsChange() {
@@ -72,10 +71,10 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 			value={{
 				callMe,
 				email,
-				performanceMode,
+				playingMode,
 				myProjects,
 				activeProjectIndex,
-				handlePerformanceModeChange,
+				handlePlayingModeChange,
 				handleUserChange,
 				handleActiveProjectIndexChange,
 			}}

@@ -2,7 +2,7 @@ import { useAppMode } from '@/context/appMode';
 import { _AppModes } from '@/lookups';
 import type { AllAppModes } from '@/types';
 
-import Performing from '@/components/appModes/Performing/Performing';
+import Playing from '@/components/appModes/Playing/Playing';
 import Selecting from '@/components/appModes/Selecting/Selecting';
 import Editing from '@/components/appModes/Editing/Editing';
 import User from '@/components/appModes/User/User';
@@ -12,7 +12,7 @@ type AppModeComponentsType = {
 };
 
 const AppModeComponents: AppModeComponentsType = {
-	Performing,
+	Playing,
 	Selecting,
 	Editing,
 	User,
