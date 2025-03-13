@@ -6,7 +6,7 @@ import { SongContextProvider } from '@/context/song';
 import Songs from './Songs';
 import NoSongs from '@/components/NoSongs';
 import AddSongButton from './AddSongButton';
-import AddSongFields from './AddSongFields';
+import AddSongForm from './AddSongForm';
 
 import type { AddSongFormData, Song, SongKey } from '@/types';
 
@@ -73,7 +73,7 @@ function Editing() {
 				addSongSongRef={addSongSongRef}
 			/>
 
-			<AddSongFields
+			<AddSongForm
 				isAdding={isAdding}
 				addSongFormRef={addSongFormRef}
 				addSongSongRef={addSongSongRef}

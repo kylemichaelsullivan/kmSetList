@@ -6,19 +6,19 @@ import { BPM } from '@/lookups';
 
 import type { AddSongFormData } from '@/types';
 
-type AddSongFieldsProps = {
+type AddSongFormProps = {
 	isAdding: boolean;
 	addSongFormRef: RefObject<HTMLFormElement>;
 	addSongSongRef: RefObject<HTMLInputElement>;
 	onSubmit: SubmitHandler<AddSongFormData>;
 };
 
-function AddSongFields({
+function AddSongForm({
 	isAdding,
 	addSongFormRef,
 	addSongSongRef,
 	onSubmit,
-}: AddSongFieldsProps) {
+}: AddSongFormProps) {
 	const { register, handleSubmit, reset } = useForm<AddSongFormData>();
 
 	const handleFormSubmit: SubmitHandler<AddSongFormData> = (data) => {
@@ -39,7 +39,7 @@ function AddSongFields({
 	return (
 		<form
 			onSubmit={handleSubmit(handleFormSubmit)}
-			className={`AddSongFields ${isAdding ? 'flex' : 'hidden'} flex-col gap-2 w-full group`}
+			className={`AddSongForm ${isAdding ? 'flex' : 'hidden'} flex-col gap-2 w-full group`}
 			ref={addSongFormRef}
 		>
 			<input
@@ -75,4 +75,4 @@ function AddSongFields({
 	);
 }
 
-export default AddSongFields;
+export default AddSongForm;
