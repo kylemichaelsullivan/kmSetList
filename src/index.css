@@ -32,16 +32,16 @@ label {
 	min-height: calc(100dvh - 8rem);
 }
 
-.Main:has(> .Performing) {
+.Main:has(> .Playing) {
 	min-height: calc(100dvh - 4rem);
 }
 
-/* Performing */
-.Performing .Song {
+/* Playing */
+.Playing .Song {
 	cursor: pointer;
 }
 
-.Performing .SliderReset::before {
+.Playing .SliderReset::before {
 	position: absolute;
 	content: 'Slide to Reset';
 	top: 50%;
@@ -49,11 +49,11 @@ label {
 	transform: translate(-50%, -50%);
 }
 
-.Performing .SliderReset input {
+.Playing .SliderReset input {
 	background-color: var(--color-off-black);
 }
 
-.Performing .Song.played {
+.Playing .Song .played {
 	color: var(--color-off-black);
 }
 

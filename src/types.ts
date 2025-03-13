@@ -1,3 +1,5 @@
+import type { RefObject } from 'react';
+
 export type AppModes = 'Playing' | 'Selecting' | 'Editing';
 export type AllAppModes = AppModes | 'User';
 
@@ -56,6 +58,12 @@ export interface AddSongFormData {
 }
 
 export type PlayingMode = 'perform' | 'rehearse' | 'focus';
+
+export type PlayingProps = {
+	songRefs: RefObject<(HTMLButtonElement | null)[]>;
+	restoreSetlistRef: RefObject<HTMLButtonElement>;
+	focusFirstSong: () => void;
+};
 
 export interface SettingsFormData {
 	callMe: string;
