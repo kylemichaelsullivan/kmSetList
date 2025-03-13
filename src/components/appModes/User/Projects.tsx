@@ -1,7 +1,7 @@
 import { useUser } from '@/context/user';
 
-import MyProjects from '@/components/appModes/User/MyProjects';
-import NoProjects from '@/components/appModes/User/NoProjects';
+import MyProjects from './MyProjects';
+import NoProjects from './NoProjects';
 
 function Projects() {
 	const { myProjects } = useUser();

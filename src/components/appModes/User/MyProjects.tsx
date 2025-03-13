@@ -9,7 +9,7 @@ import Project from './Project';
 
 function MyProjects() {
 	const { myProjects } = useUser();
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(true);
 
 	const toggleIsOpen = () => {
 		setIsOpen(!isOpen);
