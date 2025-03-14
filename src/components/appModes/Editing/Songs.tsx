@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import Song from './Song';
 
-import { Song as TSong } from '@/types';
+import type { Song as TSong } from '@/types';
 
 type SongsProps = {
 	songs: TSong[];

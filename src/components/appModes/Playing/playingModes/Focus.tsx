@@ -1,7 +1,7 @@
 import Songs from '../Songs';
 import RestoreSetlist from '../RestoreSetlist';
 
-import { PlayingProps } from '@/types';
+import type { PlayingProps } from '@/types';
 
 function Focus({ songRefs, restoreSetlistRef, focusFirstSong }: PlayingProps) {
 	return (
