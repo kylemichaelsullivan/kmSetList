@@ -1,10 +1,6 @@
 import { forwardRef, type RefObject } from 'react';
 
 import { useSetlist } from '@/context/setlist';
-import { useUser } from '@/context/user';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faNoteSticky } from '@fortawesome/free-solid-svg-icons';
 
 import Meta from './Meta';
 
@@ -19,7 +15,6 @@ type SongProps = {
 const Song = forwardRef<HTMLButtonElement, SongProps>(
 	({ song, songRefs, restoreSetlistRef }, ref) => {
 		const { setlist, hasPlayed, toggleHasPlayed } = useSetlist();
-		const { playingMode } = useUser();
 
 		const { name, songKey, bpm } = song;
 
@@ -52,19 +47,12 @@ const Song = forwardRef<HTMLButtonElement, SongProps>(
 					type='button'
 					ref={ref}
 					className={`flex justify-between w-full rounded-md border border-transparent px-4 shadow-md py-2 transition duration-200 ease-in-out${hasPlayed[name] ? ' played' : ''} hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 print:text-black`}
-					title={`${hasPlayed[name] ? 'Enable' : 'Disable'} ${name}`}
+					title={`${hasPlayed[name] ? 'I haven’t played' : 'I’ve played'} ${name}`}
 					onClick={handleClick}
 				>
 					{name}
 					<Meta note={songKey as Notes} bpm={bpm} />
 				</button>
-				{playingMode === 'rehearse' ? (
-					<button type='button' title={`Note for ${name}`}>
-						<FontAwesomeIcon icon={faNoteSticky} />
-					</button>
-				) : (
-					''
-				)}
 			</div>
 		);
 	},

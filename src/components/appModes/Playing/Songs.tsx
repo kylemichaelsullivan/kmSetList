@@ -5,7 +5,7 @@ import { useUser } from '@/context/user';
 
 import Song from './Song';
 
-import { Song as TSong } from '@/types';
+import type { Song as TSong } from '@/types';
 
 type SongsProps = {
 	songRefs: RefObject<(HTMLButtonElement | null)[]>;
@@ -18,7 +18,8 @@ function Songs({ songRefs, restoreSetlistRef }: SongsProps) {
 
 	return (
 		<div
-			className={`Songs flex w-full flex-col gap-4 ${playingMode ?? 'perform'}-mode`}
+			className='Songs relative flex w-full flex-col gap-4'
+			data-mode={playingMode}
 		>
 			{setlist.map((song: TSong, index: number) => (
 				<Song
