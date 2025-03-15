@@ -3,33 +3,33 @@ import { type RefObject } from 'react';
 import { useSetlist } from '@/context/setlist';
 import { useUser } from '@/context/user';
 
-import RehearseSong from './RehearseSong';
+import Song from './Song';
 
 import type { Song as TSong } from '@/types';
 
-type RehearseSongsProps = {
+type SongsProps = {
 	songRefs: RefObject<(HTMLButtonElement | null)[]>;
 	restoreSetlistRef: RefObject<HTMLButtonElement | null>;
 	modalNotesRef: RefObject<HTMLTextAreaElement | null>;
 	handleNoteClick: (song: TSong) => void;
 };
 
-function RehearseSongs({
+function Songs({
 	songRefs,
 	restoreSetlistRef,
 	modalNotesRef,
 	handleNoteClick,
-}: RehearseSongsProps) {
+}: SongsProps) {
 	const { playingMode } = useUser();
 	const { setlist } = useSetlist();
 
 	return (
 		<div
-			className='RehearseSongs relative flex w-full flex-col gap-4'
+			className='Songs relative flex w-full flex-col gap-4'
 			data-mode={playingMode}
 		>
 			{setlist.map((song: TSong, index: number) => (
-				<RehearseSong
+				<Song
 					song={song}
 					ref={(el: HTMLButtonElement | null) => {
 						if (songRefs.current) {
@@ -47,4 +47,4 @@ function RehearseSongs({
 	);
 }
 
-export default RehearseSongs;
+export default Songs;

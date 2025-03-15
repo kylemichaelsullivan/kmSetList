@@ -5,11 +5,11 @@ import { useSetlist } from '@/context/setlist';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faNoteSticky } from '@fortawesome/free-solid-svg-icons';
 
-import Meta from '../Meta';
+import Meta from '../../Meta';
 
 import type { Notes, Song } from '@/types';
 
-type RehearseSongProps = {
+type SongProps = {
 	song: Song;
 	songRefs: RefObject<(HTMLButtonElement | null)[]>;
 	restoreSetlistRef: RefObject<HTMLButtonElement | null>;
@@ -17,7 +17,7 @@ type RehearseSongProps = {
 	handleNoteClick: (song: Song) => void;
 };
 
-const RehearseSong = forwardRef<HTMLButtonElement, RehearseSongProps>(
+const Song = forwardRef<HTMLButtonElement, SongProps>(
 	(
 		{ song, songRefs, restoreSetlistRef, modalNotesRef, handleNoteClick },
 		ref,
@@ -55,7 +55,7 @@ const RehearseSong = forwardRef<HTMLButtonElement, RehearseSongProps>(
 		};
 
 		return (
-			<div className='RehearseSong Song flex justify-between gap-4 w-full'>
+			<div className='Song Song flex justify-between gap-4 w-full'>
 				<button
 					type='button'
 					className={`flex justify-between w-full rounded-md border border-transparent px-4 shadow-md py-2 transition duration-200 ease-in-out${hasPlayed[name] ? ' played' : ''} hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 print:text-black`}
@@ -80,4 +80,4 @@ const RehearseSong = forwardRef<HTMLButtonElement, RehearseSongProps>(
 	},
 );
 
-export default RehearseSong;
+export default Song;

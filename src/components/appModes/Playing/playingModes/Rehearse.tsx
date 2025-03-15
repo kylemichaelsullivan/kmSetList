@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 
-import RehearseSongs from './RehearseSongs';
+import Songs from './rehearse/Songs';
 import RestoreSetlist from '../RestoreSetlist';
-import Modal from '../Modal';
+import Modal from './rehearse/Modal';
 
 import type { PlayingProps, Song } from '@/types';
 
@@ -25,7 +25,7 @@ function Rehearse({
 
 	return (
 		<>
-			<RehearseSongs
+			<Songs
 				songRefs={songRefs}
 				restoreSetlistRef={restoreSetlistRef}
 				modalNotesRef={modalNotesRef}
